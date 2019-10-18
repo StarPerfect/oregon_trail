@@ -31,7 +31,29 @@ class NodeTest < Minitest::Test
 
     def test_to_string
       @list.append('West')
-      
+
       assert_equal 'The West Family', @list.to_string
+    end
+
+    def test_adding_next_node
+      @list.append('Rhodes')
+      @list.append('Hardy')
+
+      assert_equal 'Rhodes', @list.head.surname
+      assert_equal 'Hardy', @list.head.next_node.surname
+      assert_equal 2, @list.count
+
+      @list.append('Smith')
+      assert_equal 3, @list.count
+    end
+
+    def test_to_string_multiples
+      @list.append('Rhodes')
+      @list.append('Hardy')
+      @list.append('Smith')
+
+      expected = 'The Rhodes family, followed by the Hardy family, followed by the Smith family'
+
+      assert_equal expected, @list.to_string
     end
 end
